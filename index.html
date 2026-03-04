@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1‑page form · submission review</title>
+    <!-- Google Font for clean modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #f1f5f9 0%, #e4eaf1 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            margin: 0;
+        }
+        .card {
+            max-width: 880px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 60px -15px rgba(0, 20, 40, 0.25), 0 0 0 1px rgba(156, 180, 204, 0.2) inset;
+            padding: 2rem 2.25rem;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #0b2b40;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.1rem;
+        }
+        h1 span {
+            background: #1d5e8f;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-left: 0.75rem;
+            background: linear-gradient(135deg, #1a4972, #0d3557);
+            box-shadow: 0 4px 8px rgba(0, 35, 70, 0.2);
+        }
+        .subhead {
+            color: #3e5f77;
+            font-weight: 400;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #648eb0;
+            padding-left: 1rem;
+        }
+        .split-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+        }
+        .form-panel {
+            flex: 1 1 300px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 2rem;
+            padding: 1.5rem 1.5rem 1.8rem;
+            border: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 8px 18px -8px rgba(0,32,64,0.1);
+        }
+        .review-panel {
+            flex: 1 1 320px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 2rem;
+            padding: 1.5rem 1.5rem 1.8rem;
+            border: 1px solid rgba(255,255,255,0.7);
+            box-shadow: 0 8px 18px -8px rgba(0,32,64,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1d3f5c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-title i {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        .input-group {
+            margin-bottom: 1.3rem;
+        }
+        label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: #2c4f6e;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            font-size: 1rem;
+            background: white;
+            border: 1.5px solid #dae3ec;
+            border-radius: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.15s;
+            outline: none;
+            color: #13293d;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #1e6ea8;
+            box-shadow: 0 0 0 4px rgba(26, 95, 150, 0.15);
+        }
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1.8rem;
+        }
+        .btn {
+            background: white;
+            border: 1.5px solid #b7cfdf;
+            padding: 0.8rem 1.6rem;
+            border-radius: 2.4rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1b4d72;
+            cursor: pointer;
+            transition: 0.1s ease;
+            flex: 1 1 auto;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.02);
+        }
+        .btn-primary {
+            background: #1b5f96;
+            border-color: #12406b;
+            color: white;
+            box-shadow: 0 10px 18px -10px #10416b;
+        }
+        .btn-primary:hover {
+            background: #154e7c;
+            transform: scale(1.02);
+        }
+        .btn-secondary:hover {
+            background: #e1ecf5;
+            border-color: #91b2cf;
+        }
+        .review-place {
+            background: rgba(255,255,255,0.7);
+            border-radius: 1.4rem;
+            padding: 1.3rem 1.4rem;
+            margin: 0.75rem 0 1.5rem;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .review-item {
+            display: flex;
+            align-items: baseline;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed #bfd6e7;
+        }
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        .review-label {
+            font-weight: 500;
+            width: 90px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #33658b;
+            letter-spacing: 0.02em;
+        }
+        .review-value {
+            flex: 1;
+            font-weight: 500;
+            color: #102b3d;
+            word-break: break-word;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        .empty-state {
+            color: #7895b2;
+            font-style: italic;
+            text-align: center;
+            padding: 1.8rem 1rem;
+            background: #eef5fa;
+            border-radius: 1.2rem;
+            font-weight: 400;
+        }
+        .chip {
+            background: #aac3da;
+            color: #031e2f;
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .footnote {
+            margin-top: auto;
+            font-size: 0.75rem;
+            color: #4b6f8c;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.6);
+            padding-top: 1rem;
+        }
+        .status-badge {
+            background: #d1e2f0;
+            border-radius: 100px;
+            padding: 0.25rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #13374f;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>
+        📋 snapshot form
+        <span>review before send</span>
+    </h1>
+    <div class="subhead">fill details · instant preview · one‑page flow</div>
+
+    <div class="split-panel">
+        <!-- LEFT: data capture form -->
+        <div class="form-panel">
+            <div class="section-title">
+                <span>✏️ enter details</span>
+            </div>
+            <form id="dataForm" onsubmit="return false;"> <!-- no page reload, handled by js -->
+                <div class="input-group">
+                    <label for="fullname">Full name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="e.g. Samira Chen" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" placeholder="hello@domain.com">
+                </div>
+                <div class="input-group">
+                    <label for="interest">Interest</label>
+                    <select id="interest" name="interest">
+                        <option value="Design & UX">🎨 Design & UX</option>
+                        <option value="Frontend dev">⚡ Frontend dev</option>
+                        <option value="Backend & PHP">🖧 Backend & PHP</option>
+                        <option value="Product management">📊 Product</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="message">Short message</label>
+                    <textarea id="message" name="message" placeholder="your feedback or comment..."></textarea>
+                </div>
+                <div class="button-row">
+                    <button type="button" class="btn btn-primary" id="previewBtn">🔍 preview in review</button>
+                    <button type="button" class="btn btn-secondary" id="clearBtn">↻ clear fields</button>
+                </div>
+                <p style="font-size:0.75rem; color:#43759e; margin-top:1rem; display: flex; gap:0.5rem;">
+                    <span class="status-badge">⚡ real‑time ready</span>
+                    <span class="status-badge">PHP handshake</span>
+                </p>
+            </form>
+        </div>
+
+        <!-- RIGHT: submission review panel (always shows current review) -->
+        <div class="review-panel" id="reviewPanel">
+            <div class="section-title">
+                <span>🔎 submission review</span>
+            </div>
+            <!-- dynamic review content will be injected here -->
+            <div id="reviewContent" class="review-place">
+                <!-- fallback / empty state (overwritten by js if fields filled) -->
+                <div class="empty-state">
+                    ✨ fill the form and click "preview"<br> or type to see live review
+                </div>
+            </div>
+
+            <!-- "submit" section with PHP simulation -->
+            <div style="margin-top: 1rem;">
+                <button class="btn btn-primary" id="finalSubmitBtn" style="width:100%;">📬 submit final → PHP capture</button>
+            </div>
+            <div id="serverMsg" style="margin-top: 0.8rem; min-height: 2.5rem;">
+                <!-- PHP-like response message will appear here (simulated) -->
+            </div>
+            <div class="footnote">
+                ⚙️ PHP processor · data review & capture demo
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ----- DOM elements -----
+        const fullNameInput = document.getElementById('fullname');
+        const emailInput = document.getElementById('email');
+        const interestSelect = document.getElementById('interest');
+        const messageText = document.getElementById('message');
+        const previewBtn = document.getElementById('previewBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const reviewContentDiv = document.getElementById('reviewContent');
+        const finalSubmitBtn = document.getElementById('finalSubmitBtn');
+        const serverMsgDiv = document.getElementById('serverMsg');
+
+        // helper: get current form data (trimmed)
+        function getCurrentFormData() {
+            return {
+                name: fullNameInput.value.trim() || '',
+                email: emailInput.value.trim() || '',
+                interest: interestSelect.value,   // select always has a value
+                message: messageText.value.trim() || ''
+            };
+        }
+
+        // render review panel based on current input values
+        function renderReview() {
+            const data = getCurrentFormData();
+            const hasAny = data.name || data.email || data.message; // interest always present
+
+            if (!hasAny && data.interest === 'Design & UX') { // still show at least interest if everything else empty
+                // but we want to show *some* state – show interest even if others empty
+                buildReviewContent(data);
+            } else if (!hasAny) {
+                // truly empty: show empty state
+                reviewContentDiv.innerHTML = `<div class="empty-state">✨ type or use "preview" to see review</div>`;
+            } else {
+                buildReviewContent(data);
+            }
+        }
+
+        // build HTML for review using current data
+        function buildReviewContent(data) {
+            // if a field is empty we show a dim placeholder
+            const nameValue = data.name ? data.name : '<span style="opacity:0.4; font-style:italic;">— not provided —</span>';
+            const emailValue = data.email ? data.email : '<span style="opacity:0.4; font-style:italic;">— missing —</span>';
+            const interestValue = data.interest || 'Not selected';
+            const msgValue = data.message ? data.message : '<span style="opacity:0.4; font-style:italic;">— no message —</span>';
+
+            const html = `
+                <div class="review-item">
+                    <span class="review-label">name</span>
+                    <span class="review-value">${nameValue}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">email</span>
+                    <span class="review-value">${emailValue}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">interest</span>
+                    <span class="review-value">${interestValue}</span>
+                </div>
+                <div class="review-item">
+                    <span class="review-label">message</span>
+                    <span class="review-value">${msgValue}</span>
+                </div>
+            `;
+            reviewContentDiv.innerHTML = html;
+        }
+
+        // event: preview button -> explicitly refresh review
+        previewBtn.addEventListener('click', function() {
+            renderReview();
+            // subtle feedback: button flash
+            previewBtn.style.transform = 'scale(0.98)';
+            setTimeout(() => previewBtn.style.transform = '', 120);
+        });
+
+        // event: clear fields (and reset review to empty state)
+        clearBtn.addEventListener('click', function() {
+            fullNameInput.value = '';
+            emailInput.value = '';
+            interestSelect.value = 'Design & UX';   // first default option
+            messageText.value = '';
+
+            // reset review to empty / default
+            reviewContentDiv.innerHTML = `<div class="empty-state">✨ fields cleared — click preview or type</div>`;
+            serverMsgDiv.innerHTML = ''; // also clear any previous server message
+        });
+
+        // OPTIONAL: live preview on input in any field (makes it feel smooth)
+        [fullNameInput, emailInput, interestSelect, messageText].forEach(el => {
+            el.addEventListener('input', function() {
+                // we call renderReview but we could debounce, but it's harmless
+                renderReview();
+            });
+            // also update on change (for select)
+            if (el.tagName === 'SELECT') {
+                el.addEventListener('change', renderReview);
+            }
+        });
+
+        // FINAL SUBMIT — simulates a PHP submission review (POST) and shows captured data
+        finalSubmitBtn.addEventListener('click', function() {
+            // first refresh review panel with latest data
+            renderReview();
+
+            const data = getCurrentFormData();
+
+            // basic validation hint (but still "send" to php)
+            let validationMsg = '';
+            if (!data.name || !data.email || !data.message) {
+                validationMsg = '⚠️ some fields empty, but ';
+            }
+
+            // simulate PHP processing: we build a response that echoes the data
+            // In a real PHP environment, this would be a fetch to a php endpoint.
+            // For 1‑page demo, we mimic the server response here (shows data was received).
+            const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second:'2-digit' });
+
+            // create a fake "PHP received" summary
+            const phpCaptureMessage = `
+                <div style="background: #cbddee; border-radius: 1.2rem; padding: 0.9rem 1.2rem; border-left: 4px solid #1b5f96; font-size:0.9rem;">
+                    <span style="font-weight:600;">📦 PHP handler →</span> captured at ${timestamp}<br>
+                    <span style="display:inline-block; margin-top:6px;">👤 ${data.name || 'anonymous'} · 📧 ${data.email || 'no-mail'} · 🧷 ${data.interest} · ✉️ "${data.message || 'empty'}"</span>
+                    <div style="font-size:0.7rem; color:#1e3f5e; margin-top:6px;">✅ data reviewed & stored (simulated POST)</div>
+                </div>
+            `;
+
+            // Show message in serverMsg div
+            serverMsgDiv.innerHTML = phpCaptureMessage;
+
+            // Optionally add a small highlight to review panel
+            reviewContentDiv.style.transition = 'background 0.2s';
+            reviewContentDiv.style.background = '#f5faff';
+            setTimeout(() => reviewContentDiv.style.background = '', 400);
+        });
+
+        // also initialize review on page load (maybe show something with default select)
+        window.addEventListener('load', function() {
+            // default interest is pre-selected, but name etc empty => show empty plus?
+            // we show the empty state if everything empty, but interest has a value.
+            // let's make it friendlier: if only interest is default, but name/email/message empty, show review with placeholders.
+            // we'll trigger renderReview to see current state
+            renderReview();
+        });
+
+        // extra: pressing Enter in form doesn't do anything (no unintended submit)
+        document.getElementById('dataForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                previewBtn.click();   // preview on enter (friendly)
+            }
+        });
+
+        // also add a tiny "reset server message" when fields change (optional)
+        fullNameInput.addEventListener('input', function() {
+            serverMsgDiv.innerHTML = '';   // clear old submit message on new input
+        });
+        emailInput.addEventListener('input', () => serverMsgDiv.innerHTML = '');
+        messageText.addEventListener('input', () => serverMsgDiv.innerHTML = '');
+        interestSelect.addEventListener('change', () => serverMsgDiv.innerHTML = '');
+
+    })();
+</script>
+
+<!-- Simulate PHP backend note: the code above uses JavaScript for instant review, 
+     but the "final submit" button shows a PHP‑style response. In a real environment, 
+     you would replace the simulated server message with a fetch to a .php file.
+
+     For demonstration, the following PHP logic would be placed in a separate file (e.g., submit.php)
+     and called via AJAX. Since the task is 1‑page, the simulation proves the concept.
+
+     ===== EXAMPLE PHP BACKEND (submit.php) =====
+     <?php
+        header('Content-Type: application/json');
+        $name = $_POST['name'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $interest = $_POST['interest'] ?? '';
+        $message = $_POST['message'] ?? '';
+        // store or mail ... then return response
+        echo json_encode(['status'=>'success', 'data'=>compact('name','email','interest','message')]);
+     ?>
+     ===== (you can test by replacing finalSubmit with fetch) =====
+-->
+
+<!-- brief note to show integration is ready -->
+<div style="display:none;">PHP integration layer ready (simulated)</div>
+</body>
+</html>
